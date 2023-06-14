@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  movie_recommendation_mysql:
+    container_name: movie_recommendation_mysql
+    image: mysql:8.0-debian
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - movie_recommendation_dbdata:/var/lib/mysql
+    ports:
+      - "13310:3306"
+    networks:
+      - movie_recommendation_network
+
+volumes:
+  movie_recommendation_dbdata:
+    driver: local
+
+networks:
+  movie_recommendation_network:
+    driver: bridge
